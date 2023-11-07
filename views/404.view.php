@@ -1,0 +1,1 @@
+<?php echo $message ?? '-'; ?>. <a href="/">Go back.</a>
