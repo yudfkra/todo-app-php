@@ -1,6 +1,7 @@
 <?php
 
 use Core\{
+    App,
     Database, Router, Validator
 };
 
@@ -11,8 +12,10 @@ if (!Validator::integer($id)) {
     Router::abort(404, "Invalid Post ID");
 }
 
-$config = require base_path('config.php');
-$db = new Database($config['database'], 'root', '');
+/**
+ * @var \Core\Database $db
+ */
+$db = App::resolve(Database::class);
 
 $post = $db->query("select * from posts where id = :id", [':id' => $id])->findOrFail();
 

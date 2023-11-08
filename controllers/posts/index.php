@@ -1,11 +1,14 @@
 <?php
 
+use Core\App;
 use Core\Database;
 
 $heading = 'Index';
 
-$config = config();
-$db = new Database($config['database'], 'root', '');
+/**
+ * @var \Core\Database $db
+ */
+$db = App::resolve(Database::class);
 
 $posts = $db->query("select * from posts order by created_at desc")->get();
 

@@ -1,6 +1,7 @@
 <?php
 
 use Core\{
+    App,
     Database,
     Validator
 };
@@ -17,8 +18,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (empty($errors)) {
-        $config = require base_path('config.php');
-        $db = new Database($config['database'], 'root', '');
+        /**
+         * @var \Core\Database $db
+         */
+        $db = App::resolve(Database::class);
 
         $db->query('INSERT INTO POSTS (user_id, title, content, created_at, updated_at) VALUES (:user_id, :title, :content, :created_at, :updated_at)', [
             ':user_id' => 1,
