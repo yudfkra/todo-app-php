@@ -13,6 +13,11 @@
         <?php echo $post['content']; ?>
     </p>
 
+    <div>
+        <button><a href="/post/edit?id=<?php echo $post['id']; ?>">Edit</a></button>
+    </div>
+    <br>
+
     <form action="/post?id=<?php echo $post['id']; ?>" method="post">
         <input type="hidden" name="_method" value="DELETE">
         <input type="hidden" name="id" value="<?php echo $post['id']; ?>">

@@ -2,7 +2,9 @@
 
 use Core\{
     App,
-    Database, Router, Validator
+    Database,
+    Router,
+    Validator
 };
 
 $currentUserID = 1;

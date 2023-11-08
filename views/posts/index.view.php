@@ -10,10 +10,10 @@
     <table border="1">
         <thead>
             <tr>
-                <th>No.</th>
-                <th>Title</th>
-                <th>Created At</th>
-                <th style="width: 130px;">Action</th>
+                <th style="width: 20px;">No.</th>
+                <th style="width: 200px;">Title</th>
+                <th style="width: 150px;">Created At</th>
+                <th style="width: 145px;">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -27,9 +27,9 @@
                             <div>
                                 <button><a href="/post?id=<?php echo $post['id']; ?>">Detail</a></button>
 
-                                <button><a href="/posts/edit?id=<?php echo $post['id']; ?>">Edit</a></button>
+                                <button><a href="/post/edit?id=<?php echo $post['id']; ?>">Edit</a></button>
 
-                                <form action="/post?id=<?php echo $post['id']; ?>" method="post">
+                                <form action="/post?id=<?php echo $post['id']; ?>" method="post" style="display: inline;">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="id" value="<?php echo $post['id']; ?>">
                                     <button type="submit" name="delete" value="1">Delete</button>
@@ -40,7 +40,7 @@
                 <?php endforeach; ?>
             <?php else : ?>
                 <tr>
-                    <td colspan="4">Tidak ada data posts.</td>
+                    <td colspan="4" style="text-align: center;">Tidak ada data posts.</td>
                 </tr>
             <?php endif; ?>
         </tbody>
