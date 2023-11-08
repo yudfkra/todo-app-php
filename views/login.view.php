@@ -3,10 +3,20 @@
 <body>
     <?php require base_path("views/partials/header.php"); ?>
 
-    <form action="/login.php" method="post">
-        <input type="text" name="username" id="input-username" placeholder="Username">
+    <form action="/login" method="post">
+        <div>
+            <input type="text" name="username" id="input-username" placeholder="Username" value="<?php echo $_POST['username'] ?? null; ?>">
+            <?php if ($errors['username'] ?? null) : ?>
+                <span style="color: red;"><?php echo $errors['username']; ?></span>
+            <?php endif; ?>
+        </div>
 
-        <input type="password" name="password" id="input-password" placeholder="Password">
+        <div>
+            <input type="password" name="password" id="input-password" placeholder="Password">
+            <?php if ($errors['password'] ?? null) : ?>
+                <span style="color: red;"><?php echo $errors['password']; ?></span>
+            <?php endif; ?>
+        </div>
 
         <button type="submit">Login</button>
     </form>

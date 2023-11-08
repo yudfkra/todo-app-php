@@ -18,5 +18,6 @@ $router->get('/post', 'controllers/posts/show.php');
 
 $router->get('/posts', 'controllers/posts/index.php');
 
-// $router->get('/login', 'controllers/login.php');
+$router->post('/login', 'controllers/login.php');
+$router->get('/login', 'controllers/login.php');
 // $router->get('/logout', 'controllers/logout.php');
