@@ -1,21 +1,17 @@
 <?php
 
-$urlComponents = parse_url($_SERVER['REQUEST_URI']);
-
-$uri = $urlComponents['path'];
-
-$configuredRoutes = [
-    '/' => 'controllers/index.php',
-    '/post' => 'controllers/post.php',
-    '/login' => 'controllers/login.php',
-    '/logout' => 'controllers/logout.php',
-];
+$configuredRoutes = require "routes.php"; 
 
 function abort($code = 404, $message = "Page not Found.")
 {
     http_response_code($code);
 
-    require "views/{$code}.view.php";
+    $errorView = "{$code}.view.php";
+    if (!file_exists($errorView)) {
+        $errorView = "404.view.php";
+    }
+    
+    view($errorView);
     exit();
 }
 
@@ -27,7 +23,11 @@ function routeToController($uri, $routes = [])
         exit();
     }
 
-    abort();
+    abort(404, "Route not Found.");
 }
+
+$urlComponents = parse_url($_SERVER['REQUEST_URI']);
+
+$uri = $urlComponents['path'];
 
 routeToController($uri, $configuredRoutes);

@@ -1,7 +1,7 @@
-<?php require "partials/meta.php"; ?>
+<?php view("partials/meta.php"); ?>
 
 <body>
-    <?php require "partials/header.php"; ?>
+    <?php view("partials/header.php"); ?>
 
     <a href="/">Go Back</a>
 
@@ -14,4 +14,4 @@
     </p>
 </body>
 
-<?php require "partials/footer.php"; ?>
+<?php view("partials/footer.php"); ?>

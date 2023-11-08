@@ -1,1 +1,1 @@
-<?php echo $message ?? '-'; ?>. <a href="/">Go back.</a>
+<?php echo $message ?? 'Page not Found.'; ?> <a href="/">Go back.</a>

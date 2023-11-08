@@ -8,8 +8,4 @@ return [
         'user' => 'root',
         'charset' => 'utf8mb4',
     ],
-
-    '' => [
-
-    ],
 ];

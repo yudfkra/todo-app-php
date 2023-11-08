@@ -1,11 +1,11 @@
-<?php require "partials/meta.php"; ?>
+<?php view("partials/meta.php"); ?>
 
 <body>
-    <?php require "partials/header.php"; ?>
+    <?php view("partials/header.php"); ?>
 
     <h1>List Posts</h1>
 
-    <a href="/add">Add New Post</a>
+    <a href="/posts/create">Add New Post</a>
 
     <table>
         <thead>
@@ -17,18 +17,18 @@
             </tr>
         </thead>
         <tbody>
-            <?php if (!empty($posts)): ?>
+            <?php if (!empty($posts)) : ?>
                 <?php foreach ($posts as $index => $post) : ?>
                     <tr>
                         <td><?php echo $index + 1; ?></td>
                         <td><?php echo $post['title']; ?></td>
                         <td><?php echo $post['created_at']; ?></td>
                         <td>
-                            <a href="/post?id=<?php echo $post['id']; ?>">Edit</a> | <a href="/delete?id=<?php echo $post['id']; ?>">Hapus</a>
+                            <a href="/post?id=<?php echo $post['id']; ?>">Detail</a> | <a href="/edit?id=<?php echo $post['id']; ?>">Edit</a> | <a href="/delete?id=<?php echo $post['id']; ?>">Hapus</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
-            <?php else: ?>
+            <?php else : ?>
                 <tr>
                     <td colspan="4">Tidak ada data posts.</td>
                 </tr>
@@ -37,4 +37,4 @@
     </table>
 </body>
 
-<?php require "partials/footer.php"; ?>
+<?php view("partials/footer.php"); ?>

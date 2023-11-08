@@ -2,4 +2,4 @@
 
 $heading = 'Login';
 
-require "views/login.view.php";
+view("login.view.php", compact("heading"));
