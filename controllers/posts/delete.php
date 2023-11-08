@@ -1,7 +1,9 @@
 <?php
 
 use Core\{
-    Database, Router, Validator
+    Database,
+    Router,
+    Validator
 };
 
 $currentUserID = 1;
@@ -18,6 +20,9 @@ $post = $db->query("select * from posts where id = :id", [':id' => $id])->findOr
 
 authorize($post['user_id'] === $currentUserID);
 
-$heading = "{$post['title']} - Post";
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['_method'] ?? null) === 'DELETE') {
+    $db->query("delete from posts where id = :id", [':id' => $id]);
+}
 
-view("posts/show.view.php", compact("heading", "post"));
+header('location: /posts');
+exit();

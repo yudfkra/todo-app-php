@@ -43,7 +43,7 @@ class Database
         $result = $this->find();
 
         if (!$result) {
-            abort(404, 'Data not found.');
+            Router::abort(404, 'Data not found.');
         }
 
         return $result;

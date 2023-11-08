@@ -27,6 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':created_at' => (new \DateTime())->format('Y-m-d H:i:s'),
             ':updated_at' => null,
         ]);
+
+        header('location: /posts');
+        exit();
     }
 }
 

@@ -12,7 +12,7 @@ function dd($values)
 function authorize($condition, $responseCode = 403, $message = 'You are not Authorized.')
 {
     if (!$condition) {
-        abort($responseCode, $message);
+        \Core\Router::abort($responseCode, $message);
     }
 }
 

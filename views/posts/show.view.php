@@ -14,6 +14,7 @@
     </p>
 
     <form action="/post?id=<?php echo $post['id']; ?>" method="post">
+        <input type="hidden" name="_method" value="DELETE">
         <input type="hidden" name="id" value="<?php echo $post['id']; ?>">
         <button type="submit" name="delete" value="1">Delete</button>
     </form>
