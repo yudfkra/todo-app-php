@@ -1,5 +1,9 @@
 <?php
 
+use Core\{
+    Database, Validator
+};
+
 $heading = "Post";
 
 $config = require base_path('config.php');
@@ -7,10 +11,8 @@ $db = new Database($config['database'], 'root', '');
 
 $currentUserID = 1;
 
-$paramID = $_GET['id'] ?? null;
-
-$id = filter_var($paramID, FILTER_VALIDATE_INT);
-if ($id === false) {
+$id = $_GET['id'] ?? null;
+if (!Validator::integer($id)) {
     abort(404, "Invalid Post ID");
 }
 

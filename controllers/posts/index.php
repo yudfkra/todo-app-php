@@ -1,5 +1,7 @@
 <?php
 
+use Core\Database;
+
 $heading = 'Index';
 
 $config = config();

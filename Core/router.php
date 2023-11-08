@@ -1,7 +1,5 @@
 <?php
 
-$configuredRoutes = require "routes.php"; 
-
 function abort($code = 404, $message = "Page not Found.")
 {
     http_response_code($code);
@@ -18,16 +16,17 @@ function abort($code = 404, $message = "Page not Found.")
 function routeToController($uri, $routes = [])
 {
     $controller = $routes[$uri] ?? null;
-    if ($controller) {
-        require $controller;
+    if ($controller && file_exists($controllerPath = base_path($controller))) {
+        require $controllerPath;
         exit();
     }
 
     abort(404, "Route not Found.");
 }
 
-$urlComponents = parse_url($_SERVER['REQUEST_URI']);
+$configuredRoutes = require base_path("routes.php"); 
 
+$urlComponents = parse_url($_SERVER['REQUEST_URI']);
 $uri = $urlComponents['path'];
 
 routeToController($uri, $configuredRoutes);
