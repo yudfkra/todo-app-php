@@ -29,21 +29,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if ($user) {
-            $validPassword = password_verify($_POST['password'], $user['password']);
-            if (!$validPassword) {
-                $errors['username'] = 'Username atau password anda salah.';
-            }
-
-            // valid password, do auth
-            if ($validPassword) {
+            if (password_verify($_POST['password'], $user['password'])) {
                 $_SESSION['user'] = [
                     'id' => $user['id'],
                     'username' => $user['username'],
                 ];
 
+                session_regenerate_id(true);
+
                 header('location: /');
                 exit();
             }
+
+            $errors['username'] = 'Username atau password anda salah.';
         }
     }
 }

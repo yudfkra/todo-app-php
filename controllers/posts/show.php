@@ -7,7 +7,7 @@ use Core\{
     Validator
 };
 
-$currentUserID = 1;
+$currentUserID = $_SESSION['user']['id'] ?? null;
 
 $id = $_GET['id'] ?? null;
 if (!Validator::integer($id)) {
@@ -20,8 +20,6 @@ if (!Validator::integer($id)) {
 $db = App::resolve(Database::class);
 
 $post = $db->query("select * from posts where id = :id", [':id' => $id])->findOrFail();
-
-authorize($post['user_id'] === $currentUserID);
 
 $heading = "{$post['title']} - Post";
 

@@ -6,18 +6,18 @@
 
 $router->get('/', 'controllers/posts/index.php');
 
-$router->post('/posts/create', 'controllers/posts/create.php');
-$router->get('/posts/create', 'controllers/posts/create.php');
+$router->post('/posts/create', 'controllers/posts/create.php')->only('auth');
+$router->get('/posts/create', 'controllers/posts/create.php')->only('auth');
 
-$router->patch('/post/edit', 'controllers/posts/edit.php');
-$router->get('/post/edit', 'controllers/posts/edit.php');
+$router->patch('/post/edit', 'controllers/posts/edit.php')->only('auth');
+$router->get('/post/edit', 'controllers/posts/edit.php')->only('auth');
 
-$router->delete('/post', 'controllers/posts/delete.php');
+$router->delete('/post', 'controllers/posts/delete.php')->only('auth');
 $router->get('/post', 'controllers/posts/show.php');
-
 
 $router->get('/posts', 'controllers/posts/index.php');
 
-$router->post('/login', 'controllers/login.php');
-$router->get('/login', 'controllers/login.php');
-// $router->get('/logout', 'controllers/logout.php');
+$router->post('/login', 'controllers/auth.php')->only('guest');
+$router->get('/login', 'controllers/auth.php')->only('guest');
+
+$router->delete('/logout', 'controllers/logout.php')->only('auth');

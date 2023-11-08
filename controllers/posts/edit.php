@@ -8,7 +8,7 @@ use Core\{
 };
 
 
-$currentUserID = 1;
+$currentUserID = $_SESSION['user']['id'] ?? null;
 
 $id = $_GET['id'] ?? null;
 if (!Validator::integer($id)) {

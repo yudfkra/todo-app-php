@@ -8,6 +8,8 @@ use Core\{
 
 $errors = [];
 
+$currentUserID = $_SESSION['user']['id'] ?? null;
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!Validator::string($_POST['title'], 1, 256)) {
         $errors['title'] = "Isian 'title' harus diisi dengan maksimal 256 karakter.";
@@ -24,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $db = App::resolve(Database::class);
 
         $db->query('INSERT INTO POSTS (user_id, title, content, created_at, updated_at) VALUES (:user_id, :title, :content, :created_at, :updated_at)', [
-            ':user_id' => 1,
+            ':user_id' => $currentUserID,
             ':title' => $_POST['title'] ?? null,
             ':content' => $_POST['content'] ?? null,
             ':created_at' => (new \DateTime())->format('Y-m-d H:i:s'),
