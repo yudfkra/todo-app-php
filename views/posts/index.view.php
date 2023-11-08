@@ -1,19 +1,19 @@
-<?php view("partials/meta.php"); ?>
+<?php require base_path("views/partials/meta.php"); ?>
 
 <body>
-    <?php view("partials/header.php"); ?>
+    <?php require base_path("views/partials/header.php"); ?>
 
     <h1>List Posts</h1>
 
     <a href="/posts/create">Add New Post</a>
 
-    <table>
+    <table border="1">
         <thead>
             <tr>
                 <th>No.</th>
                 <th>Title</th>
                 <th>Created At</th>
-                <th>Action</th>
+                <th style="width: 130px;">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -24,7 +24,16 @@
                         <td><?php echo $post['title']; ?></td>
                         <td><?php echo $post['created_at']; ?></td>
                         <td>
-                            <a href="/post?id=<?php echo $post['id']; ?>">Detail</a> | <a href="/edit?id=<?php echo $post['id']; ?>">Edit</a> | <a href="/delete?id=<?php echo $post['id']; ?>">Hapus</a>
+                            <div>
+                                <button><a href="/post?id=<?php echo $post['id']; ?>">Detail</a></button>
+
+                                <button><a href="/posts/edit?id=<?php echo $post['id']; ?>">Edit</a></button>
+
+                                <form action="/post?id=<?php echo $post['id']; ?>" method="post">
+                                    <input type="hidden" name="id" value="<?php echo $post['id']; ?>">
+                                    <button type="submit" name="delete" value="1">Delete</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -37,4 +46,4 @@
     </table>
 </body>
 
-<?php view("partials/footer.php"); ?>
+<?php require base_path("views/partials/footer.php"); ?>

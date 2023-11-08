@@ -1,7 +1,7 @@
-<?php view("partials/meta.php"); ?>
+<?php require base_path("views/partials/meta.php"); ?>
 
 <body>
-    <?php view("partials/header.php"); ?>
+    <?php require base_path("views/partials/header.php"); ?>
 
     <a href="/">Go Back</a>
 
@@ -12,6 +12,11 @@
     <p>
         <?php echo $post['content']; ?>
     </p>
+
+    <form action="/post?id=<?php echo $post['id']; ?>" method="post">
+        <input type="hidden" name="id" value="<?php echo $post['id']; ?>">
+        <button type="submit" name="delete" value="1">Delete</button>
+    </form>
 </body>
 
-<?php view("partials/footer.php"); ?>
+<?php require base_path("views/partials/footer.php"); ?>

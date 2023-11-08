@@ -1,7 +1,7 @@
-<?php view("partials/meta.php"); ?>
+<?php require base_path("views/partials/meta.php"); ?>
 
 <body>
-    <?php view("partials/header.php"); ?>
+    <?php require base_path("views/partials/header.php"); ?>
 
     <form action="/login.php" method="post">
         <input type="text" name="username" id="input-username" placeholder="Username">
@@ -12,4 +12,4 @@
     </form>
 </body>
 
-<?php view("partials/footer.php"); ?>
+<?php require base_path("views/partials/footer.php"); ?>

@@ -9,7 +9,7 @@ function abort($code = 404, $message = "Page not Found.")
         $errorView = "404.view.php";
     }
     
-    view($errorView);
+    view($errorView, compact('code', 'message'));
     exit();
 }
 
