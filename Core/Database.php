@@ -20,6 +20,11 @@ class Database
         ]);
     }
 
+    public function lastInsertID()
+    {
+        return $this->connection->lastInsertId();
+    }
+
     public function query($query, $params = [])
     {
         $this->statement = $this->connection->prepare($query);

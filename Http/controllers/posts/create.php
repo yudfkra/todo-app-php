@@ -4,43 +4,37 @@ use Core\{
     App,
     Database,
     Session,
-    Validator
 };
+use Http\Forms\PostForm;
 
-$errors = [];
-
-$currentUserID = Session::get('user')['id'] ?? null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (!Validator::string($_POST['title'], 1, 256)) {
-        $errors['title'] = "Isian 'title' harus diisi dengan maksimal 256 karakter.";
-    }
+    $currentUserID = Session::get('user')['id'] ?? null;
+    
+    $form = PostForm::validate([
+        'title' => $_POST['title'] ?? '',
+        'content' => $_POST['content'] ?? '',
+    ]);
 
-    if (!Validator::string($_POST['content'], 1, 1000)) {
-        $errors['content'] = "Isian 'content' harus diisi dengan maksimal 1000 karakter.";
-    }
-
-    if (empty($errors)) {
-        /**
-         * @var \Core\Database $db
-         */
+    if ($form->valid()) {
+        /**  @var \Core\Database $db */
         $db = App::resolve(Database::class);
 
         $db->query('INSERT INTO POSTS (user_id, title, content, created_at, updated_at) VALUES (:user_id, :title, :content, :created_at, :updated_at)', [
             ':user_id' => $currentUserID,
-            ':title' => $_POST['title'] ?? null,
-            ':content' => $_POST['content'] ?? null,
+            ':title' => $form->attribute('title'),
+            ':content' => $form->attribute('content'),
             ':created_at' => (new \DateTime())->format('Y-m-d H:i:s'),
             ':updated_at' => null,
         ]);
 
-        redirect('/posts');
+        $postID = $db->lastInsertID();
+
+        redirect('/post?id=' . $postID);
     }
 }
 
 $heading = "Create Post";
+$errors = Session::get('errors', []);
 
-view("posts/create.view.php", compact("heading", "errors"));
-
-
-// $currentUserID = 2;
+return view("posts/create.view.php", compact("heading", "errors"));
