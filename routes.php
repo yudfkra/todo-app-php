@@ -23,4 +23,8 @@ $router->get('/login', 'auth.php')->only('guest');
 $router->delete('/logout', 'logout.php')->only(['auth', 'verify.csrf']);
 
 $router->get('/api/posts', 'api/posts/index.php')->only('auth.api');
+$router->post('/api/posts', 'api/posts/create.php')->only('auth.api');
+
+$router->patch('/api/post', 'api/posts/edit.php')->only('auth.api');
+$router->delete('/api/post', 'api/posts/delete.php')->only('auth.api');
 $router->get('/api/post', 'api/posts/show.php')->only('auth.api');
