@@ -43,8 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['_method'] ?? null) === 'PA
             ':updated_at' => (new \DateTime())->format('Y-m-d H:i:s'),
         ]);
 
-        header('location: /post?id=' . $post['id']);
-        exit();
+        redirect('/post?id=' . $post['id']);
     }
 }
 

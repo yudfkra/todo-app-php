@@ -27,5 +27,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['_method'] ?? null) === 'DE
     $db->query("delete from posts where id = :id", [':id' => $id]);
 }
 
-header('location: /posts');
-exit();
+redirect('/posts');

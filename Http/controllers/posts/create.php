@@ -33,8 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':updated_at' => null,
         ]);
 
-        header('location: /posts');
-        exit();
+        redirect('/posts');
     }
 }
 
