@@ -2,8 +2,7 @@
 
 namespace Core;
 
-use Core\Middleware\Auth;
-use Core\Middleware\Guest;
+use Core\Responses\Json;
 
 class Router
 {
@@ -64,7 +63,7 @@ class Router
             }
         }
 
-        self::abort(404, "Route not Found.");
+        return self::abort(404, "Route not Found.");
     }
 
     public function previousURL()
@@ -74,6 +73,12 @@ class Router
 
     public static function abort($code = 404, $message = "Page not Found.")
     {
+        $urlComponents = parse_url($_SERVER['REQUEST_URI']);
+        $uri = $urlComponents['path'];
+        if ($uri && strpos($uri, 'api') !== false) {
+            return Json::notFound($message)->statusCode($code)->output();
+        }
+
         http_response_code($code);
 
         $errorView = "{$code}.view.php";

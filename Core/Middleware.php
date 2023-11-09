@@ -3,6 +3,7 @@
 namespace Core;
 
 use Core\Middleware\Auth;
+use Core\Middleware\AuthApi;
 use Core\Middleware\Guest;
 use Core\Middleware\VerifyCsrf;
 
@@ -10,6 +11,7 @@ class Middleware
 {
     const MAP = [
         'auth' => Auth::class,
+        'auth.api' => AuthApi::class,
         'guest' => Guest::class,
         'verify.csrf' => VerifyCsrf::class,
     ];

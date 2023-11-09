@@ -21,3 +21,6 @@ $router->post('/login', 'auth.php')->only(['guest', 'verify.csrf']);
 $router->get('/login', 'auth.php')->only('guest');
 
 $router->delete('/logout', 'logout.php')->only(['auth', 'verify.csrf']);
+
+$router->get('/api/posts', 'api/posts/index.php')->only('auth.api');
+$router->get('/api/post', 'api/posts/show.php')->only('auth.api');
