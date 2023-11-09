@@ -1,6 +1,7 @@
 <?php
 
 use Core\Authenticator;
+use Core\Session;
 use Http\Forms\LoginForm;
 
 $form = new LoginForm();
@@ -14,11 +15,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $form->error('username', 'Username atau password anda salah.');
     }
 
-    $_SESSION['_flash']['errors'] = $form->errors();
+    Session::flash('errors', $form->errors());
     return redirect('/login');
 }
 
 $heading = 'Login';
-$errors = $_SESSION['_flash']['errors'] ?? [];
+$errors = Session::get('errors', []);
 
 return view("login.view.php", compact("heading", "errors"));
