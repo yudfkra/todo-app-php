@@ -10,6 +10,6 @@ $heading = 'Index';
  */
 $db = App::resolve(Database::class);
 
-$posts = $db->query("select * from posts order by created_at desc")->get();
+$tasks = $db->query("select * from tasks order by created_at desc")->get();
 
-view("posts/index.view.php", compact('heading', 'posts'));
+view("tasks/index.view.php", compact('heading', 'tasks'));

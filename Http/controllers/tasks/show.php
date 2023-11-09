@@ -12,7 +12,7 @@ $currentUserID = Session::get('user')['id'] ?? null;
 
 $id = $_GET['id'] ?? null;
 if (!Validator::integer($id)) {
-    Router::abort(404, "Invalid Post ID");
+    Router::abort(404, "Invalid Task ID");
 }
 
 /**
@@ -20,8 +20,8 @@ if (!Validator::integer($id)) {
  */
 $db = App::resolve(Database::class);
 
-$post = $db->query("select * from posts where id = :id", [':id' => $id])->findOrFail();
+$task = $db->query("select * from tasks where id = :id", [':id' => $id])->findOrFail();
 
-$heading = "{$post['title']} - Post";
+$heading = "{$task['title']} - Task";
 
-view("posts/show.view.php", compact("heading", "post"));
+view("tasks/show.view.php", compact("heading", "task"));

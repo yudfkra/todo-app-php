@@ -15,6 +15,6 @@ if (!Validator::integer($id)) {
 /** @var \Core\Database $db */
 $db = App::resolve(Database::class);
 
-$post = $db->query("select * from posts where id = :id", [':id' => $id])->findOrFail();
+$task = $db->query("select * from tasks where id = :id", [':id' => $id])->findOrFail();
 
-return Json::data(['post' => $post])->output();
+return Json::data(['task' => $task])->output();

@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         /**  @var \Core\Database $db */
         $db = App::resolve(Database::class);
 
-        $db->query('INSERT INTO POSTS (user_id, title, content, created_at, updated_at) VALUES (:user_id, :title, :content, :created_at, :updated_at)', [
+        $db->query('INSERT INTO TASKS (user_id, title, content, created_at, updated_at) VALUES (:user_id, :title, :content, :created_at, :updated_at)', [
             ':user_id' => $currentUserID,
             ':title' => $form->attribute('title'),
             ':content' => $form->attribute('content'),
@@ -30,11 +30,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $postID = $db->lastInsertID();
 
-        redirect('/post?id=' . $postID);
+        redirect('/task?id=' . $postID);
     }
 }
 
-$heading = "Create Post";
+$heading = "Create Task";
 $errors = Session::get('errors', []);
 
-return view("posts/create.view.php", compact("heading", "errors"));
+return view("tasks/create.view.php", compact("heading", "errors"));

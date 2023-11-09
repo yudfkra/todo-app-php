@@ -5,14 +5,14 @@
 
     <a href="/">Go Back</a>
 
-    <h1>Create Post</h1>
+    <h1>Create Task</h1>
 
-    <form action="/posts/create" method="post">
+    <form action="/tasks/create" method="post">
         <?php echo csrf_field(); ?>
 
         <label for="input-title">Title :</label>
         <div>
-            <input id="input-title" type="text" name="title" placeholder="Title of the Post" value="<?php echo old('title'); ?>" />
+            <input id="input-title" type="text" name="title" placeholder="Title of the Task" value="<?php echo old('title'); ?>" />
             <?php if ($errors['title'] ?? null) : ?>
                 <span style="color: red;"><?php echo $errors['title']; ?></span>
             <?php endif; ?>
@@ -20,7 +20,7 @@
 
         <label for="input-content">Content :</label>
         <div>
-            <textarea name="content" id="input-content" cols="20" rows="4" placeholder="Content of the Post"><?php echo old('content'); ?></textarea>
+            <textarea name="content" id="input-content" cols="20" rows="4" placeholder="Content of the Task"><?php echo old('content'); ?></textarea>
             <?php if ($errors['content'] ?? null) : ?>
                 <span style="color: red;"><?php echo $errors['content']; ?></span>
             <?php endif; ?>

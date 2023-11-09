@@ -12,7 +12,7 @@ $currentUserID = Session::get('user')['id'] ?? null;
 
 $id = $_GET['id'] ?? null;
 if (!Validator::integer($id)) {
-    Router::abort(404, "Invalid Post ID");
+    Router::abort(404, "Invalid Task ID");
 }
 
 /**
@@ -20,12 +20,12 @@ if (!Validator::integer($id)) {
  */
 $db = App::resolve(Database::class);
 
-$post = $db->query("select * from posts where id = :id", [':id' => $id])->findOrFail();
+$task = $db->query("select * from tasks where id = :id", [':id' => $id])->findOrFail();
 
-authorize($post['user_id'] === $currentUserID);
+authorize($task['user_id'] === $currentUserID);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['_method'] ?? null) === 'DELETE') {
-    $db->query("delete from posts where id = :id", [':id' => $id]);
+    $db->query("delete from tasks where id = :id", [':id' => $id]);
 }
 
-redirect('/posts');
+redirect('/tasks');

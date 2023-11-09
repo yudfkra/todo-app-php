@@ -5,25 +5,25 @@
 
     <a href="/">Go Back</a>
 
-    <h1><?php echo $post['title']; ?></h1>
+    <h1><?php echo $task['title']; ?></h1>
 
-    <h4>Created At: <?php echo $post['created_at']; ?> | Updated At: <?php echo $post['updated_at']; ?></h4>
+    <h4>Created At: <?php echo $task['created_at']; ?> | Updated At: <?php echo $task['updated_at']; ?></h4>
 
     <p>
-        <?php echo htmlspecialchars($post['content']); ?>
+        <?php echo htmlspecialchars($task['content']); ?>
     </p>
 
-    <?php if (\Core\Session::has('user') && authorizeUser($post['user_id'])) : ?>
+    <?php if (\Core\Session::has('user') && authorizeUser($task['user_id'])) : ?>
         <div>
-            <button><a href="/post/edit?id=<?php echo $post['id']; ?>">Edit</a></button>
+            <button><a href="/task/edit?id=<?php echo $task['id']; ?>">Edit</a></button>
         </div>
         <br>
 
-        <form action="/post?id=<?php echo $post['id']; ?>" method="post">
+        <form action="/task?id=<?php echo $task['id']; ?>" method="post">
             <input type="hidden" name="_token" value="<?php echo \Core\Session::get('_token'); ?>">
 
             <input type="hidden" name="_method" value="DELETE">
-            <input type="hidden" name="id" value="<?php echo $post['id']; ?>">
+            <input type="hidden" name="id" value="<?php echo $task['id']; ?>">
             <button type="submit" name="delete" value="1">Delete</button>
         </form>
     <?php endif; ?>

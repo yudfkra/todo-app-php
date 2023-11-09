@@ -13,15 +13,15 @@ $currentUserID = Session::get('user')['id'] ?? null;
 
 $id = $_GET['id'] ?? null;
 if (!Validator::integer($id)) {
-    Router::abort(404, "Invalid Post ID");
+    Router::abort(404, "Invalid Task ID");
 }
 
 /** @var \Core\Database $db */
 $db = App::resolve(Database::class);
 
-$post = $db->query("select * from posts where id = :id", [':id' => $id])->findOrFail();
+$task = $db->query("select * from tasks where id = :id", [':id' => $id])->findOrFail();
 
-authorize($post['user_id'] === $currentUserID);
+authorize($task['user_id'] === $currentUserID);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['_method'] ?? null) === 'PATCH') {
     $form = PostForm::validate([
@@ -30,18 +30,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['_method'] ?? null) === 'PA
     ]);
 
     if ($form->valid()) {
-        $db->query('UPDATE POSTS SET title = :title, content = :content, updated_at = :updated_at WHERE id = :id', [
+        $db->query('UPDATE TASKS SET title = :title, content = :content, updated_at = :updated_at WHERE id = :id', [
             ':id' => $id,
-            ':title' => $form->attribute('title', $post['title'] ?? ''),
-            ':content' => $form->attribute('content', $post['content'] ?? ''),
+            ':title' => $form->attribute('title', $task['title'] ?? ''),
+            ':content' => $form->attribute('content', $task['content'] ?? ''),
             ':updated_at' => (new \DateTime())->format('Y-m-d H:i:s'),
         ]);
 
-        redirect('/post?id=' . $post['id']);
+        redirect('/task?id=' . $task['id']);
     }
 }
 
-$heading = "{$post['title']} - Edit Post";
+$heading = "{$task['title']} - Edit Task";
 $errors = Session::get('errors', []);
 
-view("posts/edit.view.php", compact("heading", "post", "errors"));
+view("tasks/edit.view.php", compact("heading", "task", "errors"));

@@ -6,7 +6,7 @@
     <h1>List Posts</h1>
 
     <?php if (\Core\Session::has('user')) : ?>
-        <a href="/posts/create">Add New Post</a>
+        <a href="/tasks/create">Add New Task</a>
     <?php endif; ?>
 
     <table border="1">
@@ -19,24 +19,24 @@
             </tr>
         </thead>
         <tbody>
-            <?php if (!empty($posts)) : ?>
-                <?php foreach ($posts as $index => $post) : ?>
+            <?php if (!empty($tasks)) : ?>
+                <?php foreach ($tasks as $index => $task) : ?>
                     <tr>
                         <td><?php echo $index + 1; ?></td>
-                        <td><?php echo $post['title']; ?></td>
-                        <td><?php echo $post['created_at']; ?></td>
+                        <td><?php echo $task['title']; ?></td>
+                        <td><?php echo $task['created_at']; ?></td>
                         <td>
                             <div>
-                                <button><a href="/post?id=<?php echo $post['id']; ?>">Detail</a></button>
+                                <button><a href="/task?id=<?php echo $task['id']; ?>">Detail</a></button>
 
-                                <?php if (\Core\Session::has('user') && authorizeUser($post['user_id'])) : ?>
-                                    <button><a href="/post/edit?id=<?php echo $post['id']; ?>">Edit</a></button>
+                                <?php if (\Core\Session::has('user') && authorizeUser($task['user_id'])) : ?>
+                                    <button><a href="/task/edit?id=<?php echo $task['id']; ?>">Edit</a></button>
 
-                                    <form action="/post?id=<?php echo $post['id']; ?>" method="post" style="display: inline;">
+                                    <form action="/task?id=<?php echo $task['id']; ?>" method="post" style="display: inline;">
                                         <?php echo csrf_field(); ?>
 
                                         <input type="hidden" name="_method" value="DELETE">
-                                        <input type="hidden" name="id" value="<?php echo $post['id']; ?>">
+                                        <input type="hidden" name="id" value="<?php echo $task['id']; ?>">
                                         <button type="submit" name="delete" value="1">Delete</button>
                                     </form>
                                 <?php endif; ?>
@@ -46,7 +46,7 @@
                 <?php endforeach; ?>
             <?php else : ?>
                 <tr>
-                    <td colspan="4" style="text-align: center;">Tidak ada data posts.</td>
+                    <td colspan="4" style="text-align: center;">Tidak ada data tasks.</td>
                 </tr>
             <?php endif; ?>
         </tbody>
