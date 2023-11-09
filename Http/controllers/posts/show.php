@@ -4,10 +4,11 @@ use Core\{
     App,
     Database,
     Router,
+    Session,
     Validator
 };
 
-$currentUserID = $_SESSION['user']['id'] ?? null;
+$currentUserID = Session::get('user')['id'] ?? null;
 
 $id = $_GET['id'] ?? null;
 if (!Validator::integer($id)) {

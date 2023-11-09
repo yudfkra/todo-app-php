@@ -3,12 +3,13 @@
 use Core\{
     App,
     Database,
+    Session,
     Validator
 };
 
 $errors = [];
 
-$currentUserID = $_SESSION['user']['id'] ?? null;
+$currentUserID = Session::get('user')['id'] ?? null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!Validator::string($_POST['title'], 1, 256)) {

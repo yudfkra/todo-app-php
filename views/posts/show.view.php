@@ -13,7 +13,7 @@
         <?php echo $post['content']; ?>
     </p>
 
-    <?php if ($_SESSION['user'] ?? false): ?>
+    <?php if (\Core\Session::has('user')): ?>
         <div>
             <button><a href="/post/edit?id=<?php echo $post['id']; ?>">Edit</a></button>
         </div>

@@ -2,9 +2,9 @@
     <li>
         <a href="/">Home</a>
     </li>
-    <?php if ($_SESSION['user'] ?? false) : ?>
+    <?php if (\Core\Session::has('user')) : ?>
         <li>
-            Hello, <?php echo $_SESSION['user']['username'] ?? null; ?>
+            Hello, <?php echo \Core\Session::get('user')['username'] ?? null; ?>
             <br>
             <form action="/logout" method="post">
                 <input type="hidden" name="_method" value="DELETE">

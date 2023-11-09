@@ -5,7 +5,7 @@
 
     <h1>List Posts</h1>
 
-    <?php if ($_SESSION['user'] ?? false): ?>
+    <?php if (\Core\Session::has('user')): ?>
         <a href="/posts/create">Add New Post</a>
     <?php endif; ?>
 
@@ -29,7 +29,7 @@
                             <div>
                                 <button><a href="/post?id=<?php echo $post['id']; ?>">Detail</a></button>
                                 
-                                <?php if ($_SESSION['user'] ?? false): ?>
+                                <?php if (\Core\Session::has('user')): ?>
                                     <button><a href="/post/edit?id=<?php echo $post['id']; ?>">Edit</a></button>
 
                                     <form action="/post?id=<?php echo $post['id']; ?>" method="post" style="display: inline;">
