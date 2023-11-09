@@ -7,16 +7,14 @@ use Http\Forms\Form;
 
 class LoginForm extends Form
 {
-    public function validate($data = [])
+    protected function handleValidate()
     {
-        if (!Validator::string($data['username'])) {
-            $this->errors['username'] = "Isian 'username' harus diisi.";
+        if (!Validator::string($this->attribute('username', ''))) {
+            $this->error('username', "Isian 'username' harus diisi.");
         }
 
-        if (!Validator::string($data['password'], 5, 255)) {
-            $this->errors['password'] = "Isian 'password' harus diisi dan lebih dari 5 karakter.";
+        if (!Validator::string($this->attribute('password', ''), 5, 255)) {
+            $this->error('password', "Isian 'password' harus diisi dan lebih dari 5 karakter.");
         }
-
-        return $this->isValid();
     }
 }

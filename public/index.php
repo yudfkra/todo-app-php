@@ -24,6 +24,14 @@ $uri = $urlComponents['path'];
 
 $method = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];
 
-$router->route($uri, $method);
+try {
+    $router->route($uri, $method);
+} catch (\Core\Exceptions\FormValidationException $e) {
+    Session::flash('errors', $e->form()->errors());
+    Session::flash('old', $e->form()->attributes());
+    //throw $th;
 
-Session::unflash();
+    return redirect($router->previousURL());
+}
+
+\Core\Session::unflash();

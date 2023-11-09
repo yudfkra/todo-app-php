@@ -4,20 +4,19 @@ use Core\Authenticator;
 use Core\Session;
 use Http\Forms\LoginForm;
 
-$form = new LoginForm();
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if ($form->validate($_POST)) {
-        if ((new Authenticator)->attempt($_POST['username'], $_POST['password'])) {
-            return redirect();
-        }
+    $form = LoginForm::validate([
+        'username' => $_POST['username'] ?? '',
+        'password' => $_POST['password'] ?? '',
+    ]);
 
-        $form->error('username', 'Username atau password anda salah.');
+    $validLogin = (new Authenticator)->attempt($form->attribute('username'), $form->attribute('password'));
+    if (!$validLogin) {
+        $form->error('username', 'Username atau Password anda salah')
+            ->throw();
     }
 
-    Session::flash('errors', $form->errors());
-    Session::flash('old', ['username' => $_POST['username']]);
-    return redirect('/login');
+    return redirect();
 }
 
 $heading = 'Login';

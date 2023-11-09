@@ -67,6 +67,11 @@ class Router
         self::abort(404, "Route not Found.");
     }
 
+    public function previousURL()
+    {
+        return $_SERVER['HTTP_REFERER'];
+    }
+
     public static function abort($code = 404, $message = "Page not Found.")
     {
         http_response_code($code);

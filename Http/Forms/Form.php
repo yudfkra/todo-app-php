@@ -2,33 +2,66 @@
 
 namespace Http\Forms;
 
-use Http\Contracts\ValidateForm;
+use Core\Contracts\FormValidate;
+use Core\Exceptions\FormValidationException;
 
-abstract class Form implements ValidateForm
+abstract class Form implements FormValidate
 {
-    public array $errors = [];
+    protected array $errors = [];
 
-    abstract public function validate($data = []);
-
-    public function isValid()
-    {
-        return count($this->errors()) === 0;
+    public function __construct(
+        protected array $attributes = []
+    ) {
+        $this->handleValidate();
     }
 
-    public function errors()
+    public function valid(): bool
+    {
+        return !$this->failed();
+    }
+
+    public function failed(): bool
+    {
+        return count($this->errors()) >= 1;
+    }
+
+    public function errors(): array
     {
         return $this->errors;
     }
 
     public function error($field, $message)
     {
-        return $this->addError($field, $message);
-    }
-
-    public function addError($field, $message)
-    {
         $this->errors[$field] = $message;
 
         return $this;
+    }
+
+    public function attributes(): array
+    {
+        return $this->attributes;
+    }
+
+    public function attribute($field, $default = null)
+    {
+        return $this->attributes[$field] ?? $default;
+    }
+
+    public function throw()
+    {
+        FormValidationException::throw($this);
+    }
+
+    abstract protected function handleValidate();
+
+    public static function validate($attributes = [])
+    {
+        $instance = new static($attributes);
+
+        if ($instance->failed()) {
+            $instance->throw();
+        }
+
+        return $instance;
     }
 }
