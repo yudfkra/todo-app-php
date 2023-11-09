@@ -57,7 +57,7 @@ class Router
             if ($route['uri'] === $uri && $route['method'] === strtoupper($method)) {
                 Middleware::resolve($route['middleware']);
 
-                $controller = base_path($route['controller']);
+                $controller = base_path("Http/controllers/{$route['controller']}");
                 if (file_exists($controller)) {
                     return require $controller;
                 }
