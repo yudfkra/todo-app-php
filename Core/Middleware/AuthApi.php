@@ -2,6 +2,7 @@
 
 namespace Core\Middleware;
 
+use Core\Authenticator;
 use Core\Responses\Json;
 
 class AuthApi
@@ -17,12 +18,8 @@ class AuthApi
 
     public function handle()
     {
-        $config = config()['api'];
-        
-        $usernameValid = $config['username'] === $this->getUsername();
-        $passwordValid = $config['password'] === $this->getPassword();
-
-        if (!$usernameValid || !$passwordValid) {
+        $validLogin = (new Authenticator)->attempt($this->getUsername(), $this->getPassword());
+        if (!$validLogin) {
             return Json::unauthorized()->output();
         }
     }

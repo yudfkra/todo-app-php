@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'password' => $_POST['password'] ?? '',
     ]);
 
-    $validLogin = (new Authenticator)->attempt($form->attribute('username'), $form->attribute('password'));
+    $validLogin = (new Authenticator)->attemptLogin($form->attribute('username'), $form->attribute('password'));
     if (!$validLogin) {
         $form->error('username', 'Username atau Password anda salah')
             ->throw();
