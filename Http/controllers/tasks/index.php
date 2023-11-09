@@ -12,4 +12,4 @@ $db = App::resolve(Database::class);
 
 $tasks = $db->query("select * from tasks order by created_at desc")->get();
 
-view("tasks/index.view.php", compact('heading', 'tasks'));
+return view("tasks/index.view.php", compact('heading', 'tasks'));

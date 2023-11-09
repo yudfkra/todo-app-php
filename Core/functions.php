@@ -54,3 +54,13 @@ function old($key, $default = '')
 function csrf_field() {
     return '<input type="hidden" name="_token" value="' . \Core\Session::get('_token') . '">';
 }
+
+function mapStatusDisplay($status)
+{
+    return match ($status) {
+        1, "1" => 'Selesai',
+        2, "2" => 'Inprogress',
+        -1, "-1" => 'Batal',
+        default => '-'
+    };
+}

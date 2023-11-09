@@ -24,4 +24,4 @@ $task = $db->query("select * from tasks where id = :id", [':id' => $id])->findOr
 
 $heading = "{$task['title']} - Task";
 
-view("tasks/show.view.php", compact("heading", "task"));
+return view("tasks/show.view.php", compact("heading", "task"));

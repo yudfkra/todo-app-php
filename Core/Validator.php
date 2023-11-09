@@ -20,4 +20,9 @@ class Validator
     {
         return filter_var($value, FILTER_VALIDATE_INT);
     }
+
+    public static function in($value, array $array)
+    {
+        return in_array($value, $array) || ((bool) $array[$value] ?? false);
+    }
 }

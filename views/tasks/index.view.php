@@ -14,6 +14,7 @@
             <tr>
                 <th style="width: 20px;">No.</th>
                 <th style="width: 200px;">Title</th>
+                <th style="width: 100px;">Status</th>
                 <th style="width: 150px;">Created At</th>
                 <th style="width: 145px;">Action</th>
             </tr>
@@ -24,6 +25,7 @@
                     <tr>
                         <td><?php echo $index + 1; ?></td>
                         <td><?php echo $task['title']; ?></td>
+                        <td style="text-align: center;"><?php echo mapStatusDisplay($task['status']); ?></td>
                         <td><?php echo $task['created_at']; ?></td>
                         <td>
                             <div>

@@ -26,6 +26,19 @@
             <?php endif; ?>
         </div>
 
+        <label for="input-status">Status :</label>
+        <div>
+            <select name="status" id="input-status">
+                <option value="">-- Pilih Status --</option>
+                <option <?php echo old('status') == '2' ? 'selected' : ''; ?> value="2"><?php echo mapStatusDisplay(2); ?></option>
+                <option <?php echo old('status') == '1' ? 'selected' : ''; ?> value="1"><?php echo mapStatusDisplay(1); ?></option>
+                <option <?php echo old('status') == '-1' ? 'selected' : ''; ?> value="-1"><?php echo mapStatusDisplay(-1); ?></option>
+            </select>
+            <?php if ($errors['status'] ?? null) : ?>
+                <span style="color: red;"><?php echo $errors['status']; ?></span>
+            <?php endif; ?>
+        </div>
+
         <p>
             <button type="submit">Save</button>
         </p>

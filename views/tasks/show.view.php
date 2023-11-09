@@ -7,7 +7,7 @@
 
     <h1><?php echo $task['title']; ?></h1>
 
-    <h4>Created At: <?php echo $task['created_at']; ?> | Updated At: <?php echo $task['updated_at']; ?></h4>
+    <h4>Status: <?php echo mapStatusDisplay($task['status']); ?> | Created At: <?php echo $task['created_at']; ?> | Updated At: <?php echo $task['updated_at']; ?></h4>
 
     <p>
         <?php echo htmlspecialchars($task['content']); ?>
