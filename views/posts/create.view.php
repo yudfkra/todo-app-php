@@ -8,6 +8,8 @@
     <h1>Create Post</h1>
 
     <form action="/posts/create" method="post">
+        <?php echo csrf_field(); ?>
+
         <label for="input-title">Title :</label>
         <div>
             <input id="input-title" type="text" name="title" placeholder="Title of the Post" value="<?php echo old('title'); ?>" />

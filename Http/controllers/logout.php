@@ -4,4 +4,4 @@ use Core\Authenticator;
 
 (new Authenticator)->logout();
 
-redirect();
+return redirect();

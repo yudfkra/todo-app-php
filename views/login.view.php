@@ -4,6 +4,8 @@
     <?php require base_path("views/partials/header.php"); ?>
 
     <form action="/login" method="post">
+        <?php echo csrf_field(); ?>
+
         <div>
             <input type="text" name="username" id="input-username" placeholder="Username" value="<?php echo old('username'); ?>">
             <?php if ($errors['username'] ?? null) : ?>

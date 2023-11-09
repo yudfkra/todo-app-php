@@ -5,7 +5,7 @@
 
     <h1>List Posts</h1>
 
-    <?php if (\Core\Session::has('user')): ?>
+    <?php if (\Core\Session::has('user')) : ?>
         <a href="/posts/create">Add New Post</a>
     <?php endif; ?>
 
@@ -28,11 +28,13 @@
                         <td>
                             <div>
                                 <button><a href="/post?id=<?php echo $post['id']; ?>">Detail</a></button>
-                                
-                                <?php if (\Core\Session::has('user') && authorizeUser($post['user_id'])): ?>
+
+                                <?php if (\Core\Session::has('user') && authorizeUser($post['user_id'])) : ?>
                                     <button><a href="/post/edit?id=<?php echo $post['id']; ?>">Edit</a></button>
 
                                     <form action="/post?id=<?php echo $post['id']; ?>" method="post" style="display: inline;">
+                                        <?php echo csrf_field(); ?>
+
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="id" value="<?php echo $post['id']; ?>">
                                         <button type="submit" name="delete" value="1">Delete</button>

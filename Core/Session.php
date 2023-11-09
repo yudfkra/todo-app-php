@@ -4,6 +4,15 @@ namespace Core;
 
 class Session
 {
+    public static function initialize()
+    {
+        session_start();
+
+        if (!Session::has('_token')) {
+            Session::put('_token', bin2hex(random_bytes(32)));
+        }
+    }
+
     public static function has($key)
     {
         return (bool) static::get($key);

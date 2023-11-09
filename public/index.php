@@ -1,9 +1,5 @@
 <?php
 
-use Core\Session;
-
-session_start();
-
 const BASE_PATH = __DIR__ . '/../';
 
 require BASE_PATH . "Core/functions.php";
@@ -14,6 +10,8 @@ spl_autoload_register(function ($class) {
 });
 
 require base_path("bootstrap.php");
+
+\Core\Session::initialize();
 
 $router = new \Core\Router();
 
@@ -27,9 +25,8 @@ $method = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];
 try {
     $router->route($uri, $method);
 } catch (\Core\Exceptions\FormValidationException $e) {
-    Session::flash('errors', $e->form()->errors());
-    Session::flash('old', $e->form()->attributes());
-    //throw $th;
+    \Core\Session::flash('errors', $e->form()->errors());
+    \Core\Session::flash('old', $e->form()->attributes());
 
     return redirect($router->previousURL());
 }

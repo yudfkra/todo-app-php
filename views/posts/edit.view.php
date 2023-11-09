@@ -8,6 +8,8 @@
     <h1><?php echo $post['title']; ?> - Edit Post</h1>
 
     <form action="/post/edit?id=<?php echo $post['id']; ?>" method="post">
+        <?php echo csrf_field(); ?>
+
         <input type="hidden" name="_method" value="PATCH">
         <input type="hidden" name="id" value="<?php echo $post['id']; ?>">
 
