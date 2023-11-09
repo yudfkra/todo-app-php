@@ -16,6 +16,11 @@ function authorize($condition, $responseCode = 403, $message = 'You are not Auth
     }
 }
 
+function authorizeUser($userID)
+{
+    return (\Core\Session::get('user')['id'] ?? null) === $userID;    
+}
+
 function base_path($path)
 {
     return BASE_PATH . $path;

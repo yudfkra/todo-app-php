@@ -29,7 +29,7 @@
                             <div>
                                 <button><a href="/post?id=<?php echo $post['id']; ?>">Detail</a></button>
                                 
-                                <?php if (\Core\Session::has('user')): ?>
+                                <?php if (\Core\Session::has('user') && authorizeUser($post['user_id'])): ?>
                                     <button><a href="/post/edit?id=<?php echo $post['id']; ?>">Edit</a></button>
 
                                     <form action="/post?id=<?php echo $post['id']; ?>" method="post" style="display: inline;">

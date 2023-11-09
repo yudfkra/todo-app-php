@@ -13,7 +13,7 @@
         <?php echo htmlspecialchars($post['content']); ?>
     </p>
 
-    <?php if (\Core\Session::has('user')): ?>
+    <?php if (\Core\Session::has('user') && authorizeUser($post['user_id'])): ?>
         <div>
             <button><a href="/post/edit?id=<?php echo $post['id']; ?>">Edit</a></button>
         </div>
