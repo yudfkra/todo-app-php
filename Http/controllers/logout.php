@@ -1,10 +1,7 @@
 <?php
 
-$_SESSION = [];
-session_destroy();
+use Core\Authenticator;
 
-$params = session_get_cookie_params();
-setcookie('PHPSESSID', '', time() - 3600, $params['path'], $params['domain'], $params['secure'], $params['httponly']);
+(new Authenticator)->logout();
 
-header('location: /');
-exit();
+redirect();

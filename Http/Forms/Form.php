@@ -19,4 +19,16 @@ abstract class Form implements ValidateForm
     {
         return $this->errors;
     }
+
+    public function error($field, $message)
+    {
+        return $this->addError($field, $message);
+    }
+
+    public function addError($field, $message)
+    {
+        $this->errors[$field] = $message;
+
+        return $this;
+    }
 }
