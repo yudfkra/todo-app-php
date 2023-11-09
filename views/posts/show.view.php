@@ -10,7 +10,7 @@
     <h4>Created At: <?php echo $post['created_at']; ?> | Updated At: <?php echo $post['updated_at']; ?></h4>
 
     <p>
-        <?php echo $post['content']; ?>
+        <?php echo htmlspecialchars($post['content']); ?>
     </p>
 
     <?php if (\Core\Session::has('user')): ?>

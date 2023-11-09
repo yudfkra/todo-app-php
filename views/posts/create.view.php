@@ -10,7 +10,7 @@
     <form action="/posts/create" method="post">
         <label for="input-title">Title :</label>
         <div>
-            <input id="input-title" type="text" name="title" placeholder="Title of the Post" value="<?php echo $_POST['title'] ?? null; ?>" />
+            <input id="input-title" type="text" name="title" placeholder="Title of the Post" value="<?php echo old('title'); ?>" />
             <?php if ($errors['title'] ?? null) : ?>
                 <span style="color: red;"><?php echo $errors['title']; ?></span>
             <?php endif; ?>
@@ -18,7 +18,7 @@
 
         <label for="input-content">Content :</label>
         <div>
-            <textarea name="content" id="input-content" cols="20" rows="4" placeholder="Content of the Post"><?php echo $_POST['content'] ?? null; ?></textarea>
+            <textarea name="content" id="input-content" cols="20" rows="4" placeholder="Content of the Post"><?php echo old('content'); ?></textarea>
             <?php if ($errors['content'] ?? null) : ?>
                 <span style="color: red;"><?php echo $errors['content']; ?></span>
             <?php endif; ?>

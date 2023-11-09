@@ -5,7 +5,7 @@
 
     <form action="/login" method="post">
         <div>
-            <input type="text" name="username" id="input-username" placeholder="Username" value="<?php echo $_POST['username'] ?? null; ?>">
+            <input type="text" name="username" id="input-username" placeholder="Username" value="<?php echo old('username'); ?>">
             <?php if ($errors['username'] ?? null) : ?>
                 <span style="color: red;"><?php echo $errors['username']; ?></span>
             <?php endif; ?>

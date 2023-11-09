@@ -13,7 +13,7 @@
 
         <label for="input-title">Title :</label>
         <div>
-            <input id="input-title" type="text" name="title" placeholder="Title of the Post" value="<?php echo $_POST['title'] ?? $post['title'] ?? null; ?>" />
+            <input id="input-title" type="text" name="title" placeholder="Title of the Post" value="<?php echo old('title', $post['title'] ?? ''); ?>" />
             <?php if ($errors['title'] ?? null) : ?>
                 <span style="color: red;"><?php echo $errors['title']; ?></span>
             <?php endif; ?>
@@ -21,7 +21,7 @@
 
         <label for="input-content">Content :</label>
         <div>
-            <textarea name="content" id="input-content" cols="20" rows="4" placeholder="Content of the Post"><?php echo $_POST['content'] ?? $post['content'] ?? null; ?></textarea>
+            <textarea name="content" id="input-content" cols="20" rows="4" placeholder="Content of the Post"><?php echo htmlspecialchars(old('content', $post['content'] ?? '')); ?></textarea>
             <?php if ($errors['content'] ?? null) : ?>
                 <span style="color: red;"><?php echo $errors['content']; ?></span>
             <?php endif; ?>

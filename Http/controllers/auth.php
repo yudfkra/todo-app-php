@@ -16,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     Session::flash('errors', $form->errors());
+    Session::flash('old', ['username' => $_POST['username']]);
     return redirect('/login');
 }
 
