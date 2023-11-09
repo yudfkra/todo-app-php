@@ -2,22 +2,21 @@
 
 use Core\App;
 use Core\Database;
-use Core\Validator;
+use Http\Forms\LoginForm;
 
 $heading = 'Login';
 
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (!Validator::string($_POST['username'])) {
-        $errors['username'] = "Isian 'username' harus diisi.";
+    $validator = new LoginForm();
+    $validator->validate($_POST);
+
+    if (!$validator->isValid()) {
+        $errors = $validator->errors();
     }
 
-    if (!Validator::string($_POST['password'], 5, 255)) {
-        $errors['password'] = "Isian 'password' harus diisi dan lebih dari 5 karakter.";
-    }
-
-    if (empty($errors)) {
+    if ($validator->isValid()) {
         /**
          * @var \Core\Database $db
          */
