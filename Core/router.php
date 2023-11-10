@@ -73,9 +73,7 @@ class Router
 
     public static function abort($code = 404, $message = "Page not Found.")
     {
-        $urlComponents = parse_url($_SERVER['REQUEST_URI']);
-        $uri = $urlComponents['path'];
-        if ($uri && strpos($uri, 'api') !== false) {
+        if (static::isApiRequest()) {
             return Json::notFound($message)->statusCode($code)->output();
         }
 
@@ -88,6 +86,13 @@ class Router
         
         view($errorView, compact('code', 'message'));
         exit();
+    }
+
+    public static function isApiRequest()
+    {
+        $urlComponents = parse_url($_SERVER['REQUEST_URI']);
+        $uri = $urlComponents['path'];
+        return $uri && strpos($uri, 'api') !== false;
     }
 }
 

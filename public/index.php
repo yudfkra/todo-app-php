@@ -25,6 +25,10 @@ $method = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];
 try {
     $router->route($uri, $method);
 } catch (\Core\Exceptions\FormValidationException $e) {
+    if (\Core\Router::isApiRequest()) {
+        return \Core\Responses\Json::validation(['errors' => $e->form()->errors()])->output();
+    }
+
     \Core\Session::flash('errors', $e->form()->errors());
     \Core\Session::flash('old', $e->form()->attributes());
 

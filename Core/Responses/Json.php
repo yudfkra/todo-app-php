@@ -82,6 +82,11 @@ class Json
         exit();
     }
 
+    public function __toString()
+    {
+        return $this->output();
+    }
+
     public static function make()
     {
         $output = new static;
