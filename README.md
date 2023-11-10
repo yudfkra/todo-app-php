@@ -15,9 +15,6 @@ Simple CRUD, Authentication, Rest API for study case assignment purpose.
 4. Open `http://localhost:8000` in browser
 
     User:
-    
-    - Username : `admin`
-      Password : `admin`
 
-    - Username : `guest`
-    - Password : `guest`
+    - Username: `admin` Password: `admin`
+    - Username: `guest` Password: `guest`
