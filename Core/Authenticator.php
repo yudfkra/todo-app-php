@@ -35,13 +35,19 @@ class Authenticator
 
     public function setUser($user)
     {
+        unset($user['password']);
+
         $this->user = $user;
 
         return $this;
     }
 
-    public function user()
+    public function user($attribute = null)
     {
+        if ($attribute) {
+            return $this->user[$attribute] ?? null;
+        }
+
         return $this->user;
     }
 

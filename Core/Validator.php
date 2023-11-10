@@ -23,6 +23,6 @@ class Validator
 
     public static function in($value, array $array)
     {
-        return in_array($value, $array) || ((bool) $array[$value] ?? false);
+        return $value && (in_array($value, $array) || (bool) ($array[$value] ?? false));
     }
 }
