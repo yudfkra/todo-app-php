@@ -16,6 +16,10 @@ class PostForm extends Form
             $this->error('content', "Isian 'content' harus diisi dengan maksimal 1000 karakter.");
         }
 
+        if (!Validator::integer($this->attribute('status', ''))) {
+            $this->error('status', "Isian 'status' harus berupa angka.");
+        }
+
         if (!Validator::in($this->attribute('status', ''), [1, 2, -1])) {
             $this->error('status', "Isian 'status' tidak valid.");
         }

@@ -10,7 +10,7 @@
     <form action="/task/edit?id=<?php echo $task['id']; ?>" method="post">
         <?php echo csrf_field(); ?>
 
-        <input type="hidden" name="_method" value="PATCH">
+        <input type="hidden" name="_method" value="PUT">
         <input type="hidden" name="id" value="<?php echo $task['id']; ?>">
 
         <label for="input-title">Title :</label>

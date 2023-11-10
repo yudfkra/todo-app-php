@@ -23,7 +23,7 @@ $task = $db->query("select * from tasks where id = :id", [':id' => $id])->findOr
 
 authorize($task['user_id'] === $currentUserID);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['_method'] ?? null) === 'PATCH') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['_method'] ?? null) === 'PUT') {
     $form = PostForm::validate([
         'title' => $_POST['title'] ?? '',
         'content' => $_POST['content'] ?? '',
