@@ -1,6 +1,6 @@
 <?php
 
-namespace Core;
+namespace Core\Middleware;
 
 use Core\Middleware\Auth;
 use Core\Middleware\AuthApi;

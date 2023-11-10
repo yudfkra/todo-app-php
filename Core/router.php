@@ -2,6 +2,7 @@
 
 namespace Core;
 
+use Core\Middleware\Middleware;
 use Core\Responses\Json;
 
 class Router
