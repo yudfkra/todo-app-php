@@ -8,9 +8,7 @@ class Authenticator
 
     public function attempt($username, $password)
     {
-        /**
-         * @var \Core\Database $db
-         */
+        /** @var \Core\Database $db  */
         $db = App::resolve(Database::class);
 
         $user = $db->query('select * from users where username = :username', [':username' => $username])->find();

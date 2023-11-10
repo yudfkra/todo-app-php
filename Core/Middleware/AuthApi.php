@@ -2,11 +2,14 @@
 
 namespace Core\Middleware;
 
+use Core\App;
 use Core\Authenticator;
 use Core\Responses\Json;
 
 class AuthApi
 {
+    protected Authenticator $auth;
+
     protected $parsedUsername = null;
 
     protected $parsedPassword = null;
@@ -14,11 +17,13 @@ class AuthApi
     public function __construct()
     {
         $this->parseAuthorization();
+
+        $this->auth = App::resolve(Authenticator::class);
     }
 
     public function handle()
     {
-        $validLogin = (new Authenticator)->attempt($this->getUsername(), $this->getPassword());
+        $validLogin = $this->auth->attempt($this->getUsername(), $this->getPassword());
         if (!$validLogin) {
             return Json::unauthorized()->output();
         }

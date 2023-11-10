@@ -3,7 +3,7 @@
 <body>
     <?php require base_path("views/partials/header.php"); ?>
 
-    <h1>List Posts</h1>
+    <h1>List Tasks</h1>
 
     <?php if (\Core\Session::has('user')) : ?>
         <a href="/tasks/create">Add New Task</a>
