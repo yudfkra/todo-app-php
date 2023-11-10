@@ -26,5 +26,6 @@ $router->get('/api/tasks', 'api/tasks/index.php')->only('auth.api');
 $router->post('/api/tasks', 'api/tasks/create.php')->only('auth.api');
 
 $router->put('/api/task', 'api/tasks/update.php')->only('auth.api');
+$router->post('/api/task-image', 'api/tasks/update-image.php')->only('auth.api');
 $router->delete('/api/task', 'api/tasks/delete.php')->only('auth.api');
 $router->get('/api/task', 'api/tasks/show.php')->only('auth.api');
