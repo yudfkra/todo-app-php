@@ -7,7 +7,7 @@
 
     <h1>Create Task</h1>
 
-    <form action="/tasks/create" method="post">
+    <form action="/tasks/create" method="post" enctype="multipart/form-data">
         <?php echo csrf_field(); ?>
 
         <label for="input-title">Title :</label>
@@ -23,6 +23,14 @@
             <textarea name="content" id="input-content" cols="20" rows="4" placeholder="Content of the Task"><?php echo old('content'); ?></textarea>
             <?php if ($errors['content'] ?? null) : ?>
                 <span style="color: red;"><?php echo $errors['content']; ?></span>
+            <?php endif; ?>
+        </div>
+
+        <label for="input-image">Image :</label>
+        <div>
+            <input id="input-image" type="file" name="image" accept="image/png, image/jpeg, image/jpg" />
+            <?php if ($errors['image'] ?? null) : ?>
+                <span style="color: red;"><?php echo $errors['image']; ?></span>
             <?php endif; ?>
         </div>
 

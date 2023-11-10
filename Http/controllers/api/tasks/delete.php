@@ -26,4 +26,8 @@ authorize($task['user_id'] === $currentUserID);
 
 $db->query("delete from tasks where id = :id", [':id' => $id]);
 
+if (!empty($task['file']) && file_exists($filePath = public_path($task['file']))) {
+    unlink($filePath);
+}
+
 return Json::data(null)->output();

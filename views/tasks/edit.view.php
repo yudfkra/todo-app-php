@@ -7,7 +7,7 @@
 
     <h1><?php echo $task['title']; ?> - Edit Task</h1>
 
-    <form action="/task/edit?id=<?php echo $task['id']; ?>" method="post">
+    <form action="/task/edit?id=<?php echo $task['id']; ?>" method="post" enctype="multipart/form-data">
         <?php echo csrf_field(); ?>
 
         <input type="hidden" name="_method" value="PUT">
@@ -26,6 +26,14 @@
             <textarea name="content" id="input-content" cols="20" rows="4" placeholder="Content of the Task"><?php echo htmlspecialchars(old('content', $task['content'] ?? '')); ?></textarea>
             <?php if ($errors['content'] ?? null) : ?>
                 <span style="color: red;"><?php echo $errors['content']; ?></span>
+            <?php endif; ?>
+        </div>
+
+        <label for="input-image">Image :</label>
+        <div>
+            <input id="input-image" type="file" name="image" accept="image/png, image/jpeg, image/jpg" />
+            <?php if ($errors['image'] ?? null) : ?>
+                <span style="color: red;"><?php echo $errors['image']; ?></span>
             <?php endif; ?>
         </div>
 

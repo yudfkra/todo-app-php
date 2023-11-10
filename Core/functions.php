@@ -3,7 +3,7 @@
 function dd($values)
 {
     echo "<pre>";
-    var_dump($values);
+    print_r($values);
     echo "</pre>";
 
     exit();
@@ -24,6 +24,11 @@ function authorizeUser($userID)
 function base_path($path)
 {
     return BASE_PATH . $path;
+}
+
+function public_path($path)
+{
+    return base_path("public/{$path}");    
 }
 
 function config()

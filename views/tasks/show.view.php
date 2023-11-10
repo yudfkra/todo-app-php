@@ -9,7 +9,11 @@
 
     <h4>Status: <?php echo mapStatusDisplay($task['status']); ?> | Created At: <?php echo $task['created_at']; ?> | Updated At: <?php echo $task['updated_at']; ?></h4>
 
-    <p>
+    <p> 
+        <?php if (!empty($task['file']) && file_exists($imagePath = public_path($task['file']))): ?>
+            <img src="<?php echo $task['file']; ?>" alt="<?php echo $task['title']; ?>">
+            <br>
+        <?php endif; ?>
         <?php echo htmlspecialchars($task['content']); ?>
     </p>
 

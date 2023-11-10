@@ -17,15 +17,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'status' => $_POST['status'] ?? '',
     ]);
 
+    $form->uploadFile();
+
     if ($form->valid()) {
         /**  @var \Core\Database $db */
         $db = App::resolve(Database::class);
 
-        $db->query('INSERT INTO TASKS (user_id, title, content, status, created_at, updated_at) VALUES (:user_id, :title, :content, :status, :created_at, :updated_at)', [
+        $db->query('INSERT INTO TASKS (user_id, title, content, status, file, created_at, updated_at) VALUES (:user_id, :title, :content, :status, :file, :created_at, :updated_at)', [
             ':user_id' => $currentUserID,
             ':title' => $form->attribute('title'),
             ':content' => $form->attribute('content'),
             ':status' => $form->attribute('status'),
+            ':file' => $form->attribute('image'),
             ':created_at' => (new \DateTime())->format('Y-m-d H:i:s'),
             ':updated_at' => null,
         ]);
