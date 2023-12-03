@@ -1,6 +1,7 @@
 # Todo App
 
 Simple CRUD, Authentication, Rest API for study case assignment purpose.
+Based on Laracast PLaylist https://www.youtube.com/playlist?list=PL3VM-unCzF8ipG50KDjnzhugceoSG3RTC
 
 ## Requirements
 
